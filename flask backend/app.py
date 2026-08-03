@@ -13,7 +13,7 @@ import sys
 import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'ml and nlp'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'Database'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'database'))
 
 from flask      import Flask, request, jsonify
 from flask_cors import CORS
