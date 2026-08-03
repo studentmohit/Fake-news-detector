@@ -17,15 +17,15 @@ export default function App() {
   const [stats, setStats]   = useState(null);
 
   useEffect(() => {
-    if (tab === "history") fetch("http://localhost:5000/api/history").then(r => r.json()).then(d => setHist(d.history || [])).catch(() => {});
-    if (tab === "stats")   fetch("http://localhost:5000/api/stats").then(r => r.json()).then(setStats).catch(() => {});
+    if (tab === "history") fetch("https://fake-news-detector-11zt.onrender.com/api/history").then(r => r.json()).then(d => setHist(d.history || [])).catch(() => {});
+    if (tab === "stats")   fetch("https://fake-news-detector-11zt.onrender.com/api/stats").then(r => r.json()).then(setStats).catch(() => {});
   }, [tab]);
 
   const analyse = async () => {
     if (text.trim().length < 20) { setError("Please enter at least 20 characters."); return; }
     setLoad(true); setError(""); setResult(null);
     try {
-      const res  = await fetch("http://localhost:5000/api/analyze", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text }) });
+      const res  = await fetch("https://fake-news-detector-11zt.onrender.com/api/analyze", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text }) });
       const data = await res.json();
       if (data.success) setResult(data);
       else setError(data.error || "Analysis failed.");
@@ -34,13 +34,13 @@ export default function App() {
   };
 
   const deleteOne = async (id) => {
-    await fetch(`http://localhost:5000/api/history/${id}`, { method: "DELETE" });
+    await fetch(`https://fake-news-detector-11zt.onrender.com/api/history/${id}`, { method: "DELETE" });
     setHist(prev => prev.filter(item => item.id !== id));
   };
 
   const deleteAll = async () => {
     if (!window.confirm("Delete ALL history?")) return;
-    await fetch("http://localhost:5000/api/history/all", { method: "DELETE" });
+    await fetch("https://fake-news-detector-11zt.onrender.com/api/history/all", { method: "DELETE" });
     setHist([]);
   };
 
@@ -151,6 +151,7 @@ export default function App() {
                       </a>
                     )}
                   </div>
+
 
                   {/* Google */}
                   <div style={{ background: colors.light, borderRadius: "10px", padding: "14px" }}>
